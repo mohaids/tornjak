@@ -98,12 +98,14 @@ This opens a port on localhost:50000. Open the browser and go to `http://localho
 
 > **TIP:** The command `go run cmd/manager/main.go` should be run from the root directory of the Tornjak repository, not from within the `cmd/manager` directory itself.
 >
+> **TIP for Windows Users**: If you're running Go on Windows, it's recommended to run go run main.go from WSL (Windows Subsystem for Linux) instead. WSL has the necessary tools like gcc pre-installed, which is required for compiling certain Go dependencies (e.g., go-sqlite3). Running in WSL also avoids some of the common issues with Windows permissions and Go's native builds.
+>
 > **Common Issues:**
 >
 > **Windows Permission Errors:** On Windows, you might encounter "Access is denied" errors when trying to run the Go application. To resolve this:
 >
 > 1. Try running your terminal/command prompt as Administrator
-> 2. Check if any antivirus software is blocking execution
+> 2. Check if any antivirus software is blocking execution - for me my Spectrum Security Suite was blocking main.go from running
 > 3. Ensure you have proper permissions to the directory
 > 4. If using Windows Defender or another security tool, you might need to add an exception
 > 5. Alternatively, you can build the binary first with `go build cmd/manager/main.go` and then run the resulting executable
