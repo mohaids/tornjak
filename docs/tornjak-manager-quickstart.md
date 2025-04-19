@@ -63,6 +63,12 @@ helm upgrade --install -n spire-mgmt spire-crds spire-crds --repo https://spiffe
 helm upgrade --install -n spire-mgmt spire spire --repo https://spiffe.github.io/helm-charts-hardened/ -f helm_values.yaml
 ```
 
+#### Understanding the Helm Commands:
+
+> 1. The first command installs the SPIRE CRDs (Custom Resource Definitions) from a remote Helm repository. CRDs are like blueprints that extend Kubernetes with new types of resources. This command must be run first because the actual SPIRE components need these definitions to exist before they can be created.
+>
+> 2. The second command requires the a local file named helm_vales.yaml, so ensure it is in your current working directory when running the second command, or use the full path to the file. The purpose of the command is to install the actual SPIRE and Tornjak components using your configuration values. This includes the SPIRE server, agents, and the Tornjak management interface.
+
 ### Step 2.5: Expose the Tornjak backend Endpoints
 
 Open a new terminal window for the following command to expose the Tornjak backend endpoints:
