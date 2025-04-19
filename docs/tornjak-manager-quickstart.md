@@ -193,3 +193,14 @@ rm -r serverlocaldb
 kind delete cluster
 ```
 
+> **TIP:** When you're done with your local environment, it's important to clean up any resources to avoid leaving unnecessary files or clusters running. The following steps will help you delete the local DB file and remove the KIND cluster.
+
+### **Common Issues and Tips for Cleanup:**
+
+- **Error while removing `serverlocaldb`:**
+    - **Possible Cause**: You might get a permission error or the file might be in use if another process is accessing it.
+    - **Tip**: Ensure no other processes are using the `serverlocaldb` before trying to remove it. If necessary, stop any related services or processes and try again.
+
+- **KIND cluster deletion fails:**
+    - **Possible Cause**: The `kind delete cluster` command may fail if the cluster was not created properly or if the Kubernetes context is not set up correctly.
+    - **Tip**: Make sure your Kubernetes context is set to the correct one for the cluster you're trying to delete. You can check this with `kubectl config current-context`. If the context is incorrect, switch to the appropriate context and try deleting the cluster again.
