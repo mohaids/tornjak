@@ -33,6 +33,8 @@ For the purposes of this, we can name the clusters `server` and `client`:
 kind create cluster
 ```
 
+> **TIP:** The `kind create cluster` command sets up a complete Kubernetes cluster on your local machine using containers to simulate cluster nodes. By default, this creates a single-node cluster named "kind" with both control plane and worker functionality. This command may take several minutes to complete as it downloads the necessary container images and initializes the Kubernetes components. You can verify your cluster is running with `kubectl cluster-info`.
+
 ### Step 2: Deploy SPIRE + Tornjak via Helm
 
 We will deploy SPIRE and Tornjak via the Helm charts. 
