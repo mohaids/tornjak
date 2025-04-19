@@ -165,6 +165,22 @@ cd frontend
 REACT_APP_API_SERVER_URI=http://localhost:50000/ REACT_APP_TORNJAK_MANAGER=true npm start
 ```
 
+> **TIP:** If you encounter issues with the UI not connecting to the backend, make sure the `REACT_APP_API_SERVER_URI` is correctly set to `http://localhost:50000/` (or the correct port). This tells the frontend where to find the Tornjak Manager API. Also, ensure that the Tornjak manager API is running and accessible on this port.
+
+### **Common Issues:**
+
+- **Frontend cannot connect to the backend API:**
+    - **Possible Cause**: There might be a mismatch between the frontend’s `REACT_APP_API_SERVER_URI` and the actual address of the API server.
+    - **Tip**: Double-check the API server URI. If you're running everything locally, ensure that the backend API is exposed at `http://localhost:50000/`. If using a different port, update the URI accordingly.
+
+- **CORS issues (Cross-Origin Resource Sharing):**
+    - **Possible Cause**: The UI might fail to make API requests if CORS is not configured properly in the backend.
+    - **Tip**: If you see CORS-related errors in the browser console, ensure that the backend is configured to allow requests from your UI’s origin (e.g., `http://localhost:3000`).
+
+- **UI fails to load or shows a blank page:**
+    - **Possible Cause**: The backend API at `localhost:50000` might not be accessible or running.
+    - **Tip**: Ensure the Tornjak Manager API is running and that you've completed the necessary steps for port-forwarding to expose it correctly. You can check the status of the API with `curl http://localhost:50000/manager-api/server/list`.
+
 ### Cleanup
 
 Running the manager in local mode creates a local DB file which we can remove:
