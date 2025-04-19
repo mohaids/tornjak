@@ -11,7 +11,7 @@ import (
 
 // TO DO: Add DELETE servers option from the data base
 const (
-	initServersTable = "CREATE TABLE IF NOT EXISTS servers (servername TEXT PRIMARY KEY, address TEXT, tls bool, mtls bool, ca varBinary, cert varBinary, key varBinary)"
+	initServersTable = "CREATE TABLE IF NOT EXISTS servers (servername TEXT PRIMARY KEY, address TEXT, tls INTEGER, mtls INTEGER, ca BLOB, cert BLOB, key BLOB)"
 )
 
 type LocalSqliteDb struct {
@@ -26,11 +26,11 @@ func NewLocalSqliteDB(dbpath string) (ManagerDB, error) {
 	// Table for servers
 	statement, err := database.Prepare(initServersTable)
 	if err != nil {
-		return nil, errors.Errorf("Unable to execute SQL query :%v", initServersTable)
+		return nil, errors.Wrapf(err, "Unable to execute SQL query: %v", initServersTable)
 	}
 	_, err = statement.Exec()
 	if err != nil {
-		return nil, errors.Errorf("Unable to execute SQL query :%v", initServersTable)
+		return nil, errors.Wrapf(err, "Unable to execute SQL query: %v", initServersTable)
 	}
 
 	return &LocalSqliteDb{
