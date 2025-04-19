@@ -96,6 +96,18 @@ go run cmd/manager/main.go
 
 This opens a port on localhost:50000. Open the browser and go to `http://localhost:50000/manager-api/server/list` to verify. 
 
+> **TIP:** The command `go run cmd/manager/main.go` should be run from the root directory of the Tornjak repository, not from within the `cmd/manager` directory itself.
+>
+> **Common Issues:**
+>
+> **Windows Permission Errors:** On Windows, you might encounter "Access is denied" errors when trying to run the Go application. To resolve this:
+>
+> 1. Try running your terminal/command prompt as Administrator
+> 2. Check if any antivirus software is blocking execution
+> 3. Ensure you have proper permissions to the directory
+> 4. If using Windows Defender or another security tool, you might need to add an exception
+> 5. Alternatively, you can build the binary first with `go build cmd/manager/main.go` and then run the resulting executable
+
 #### Common Troubleshooting issues:
 
 
