@@ -77,6 +77,15 @@ Open a new terminal window for the following command to expose the Tornjak backe
 kubectl port-forward  -n spire-server svc/spire-tornjak-backend 10000:10000
 ```
 
+> **TIP:** The `kubectl port-forward` command creates a temporary network connection between your local machine and a service running inside your Kubernetes cluster. In this case, it connects port 10000 on your local machine to port 10000 of the Tornjak backend service running in the cluster. This allows you to access the Tornjak API at http://localhost:10000 from your local machine without needing to set up more complex networking like Ingress or LoadBalancer services.
+> 
+> This command must be run in a separate terminal window because it will continue running in the foreground until you press Ctrl+C to stop it. You'll need to keep this terminal open while you're using Tornjak.
+> 
+> **Common Issues:**
+> - If you see an error like `Error from server (NotFound): services "spire-tornjak-backend" not found`, make sure you're using the correct namespace with `-n spire-server`.
+> - If you see `unable to listen on port 10000: Listeners failed to create with the following errors: [unable to create listener: Error listen tcp4 127.0.0.1:10000: bind: address already in use]`, it means port 10000 is already being used by another process. You can use a different local port like `kubectl port-forward -n spire-server svc/spire-tornjak-backend 20000:10000` which would make the service available at http://localhost:20000 instead.
+
+
 ### Step 3: Run the Tornjak Manager
 
 Go to the Tornjak repo and run the following command:
@@ -86,6 +95,9 @@ go run cmd/manager/main.go
 ```
 
 This opens a port on localhost:50000. Open the browser and go to `http://localhost:50000/manager-api/server/list` to verify. 
+
+#### Common Troubleshooting issues:
+
 
 ### Step 3.5: Make a Tornjak Manager API Call
 
