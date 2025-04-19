@@ -23,6 +23,8 @@ If you are using Podman, you will need to set the `KIND_EXPERIMENTAL_PROVIDER`:
 export KIND_EXPERIMENTAL_PROVIDER=podman
 ```
 
+> **TIP:** This environment variable tells KIND (Kubernetes in Docker) to use Podman as the container runtime instead of Docker. Podman is a daemonless container engine that can run without root privileges, making it more secure for some environments. KIND's Podman support is considered experimental, so you may encounter some issues not present when using Docker. If you experience problems, consider switching to Docker or check the KIND documentation for Podman-specific troubleshooting.
+
 ### Step 1: Create the Kind clusters
 
 For the purposes of this, we can name the clusters `server` and `client`:
