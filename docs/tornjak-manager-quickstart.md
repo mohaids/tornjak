@@ -133,6 +133,21 @@ Finally, to run a backend call, here's an example:
 curl http://localhost:50000/manager-api/tornjak/serverinfo/backend
 ```
 
+> **TIP:** When visiting [http://localhost:50000/manager-api/server/list](http://localhost:50000/manager-api/server/list), it should look something like this:
+
+```json
+{
+  "servers": [
+    {
+      "name": "backend",
+      "address": "http://localhost:10000",
+      "tls": false,
+      "mtls": false
+    }
+  ]
+}
+```
+
 ### Step 4: Run the UI
 
 Finally, we can run the UI. From the root Tornjak directory:
