@@ -82,8 +82,16 @@ kubectl port-forward  -n spire-server svc/spire-tornjak-backend 10000:10000
 > This command must be run in a separate terminal window because it will continue running in the foreground until you press Ctrl+C to stop it. You'll need to keep this terminal open while you're using Tornjak.
 > 
 > **Common Issues:**
-> - If you see an error like `Error from server (NotFound): services "spire-tornjak-backend" not found`, make sure you're using the correct namespace with `-n spire-server`.
-> - If you see `unable to listen on port 10000: Listeners failed to create with the following errors: [unable to create listener: Error listen tcp4 127.0.0.1:10000: bind: address already in use]`, it means port 10000 is already being used by another process. You can use a different local port like `kubectl port-forward -n spire-server svc/spire-tornjak-backend 20000:10000` which would make the service available at http://localhost:20000 instead.
+> - **`Error from server (NotFound): services "spire-tornjak-backend" not found`**: Ensure you're using the correct namespace with `-n spire-server`.
+> - **`unable to listen on port 10000: address already in use`**: 
+>   - Port `10000` is occupied. To identify the process:
+>     - On Windows, run `netstat -an | findstr :10000` to find the process using the port.
+>     - On Linux/Mac, run `sudo lsof -i :10000` or `netstat -tuln | grep :10000`.
+>   - To kill the process:
+>     - On Windows: Use `Task Manager` or `taskkill /PID <PID> /F`.
+>     - On Linux/Mac: Run `kill -9 <PID>` to terminate the process.
+>   - Alternatively, use a different port with:  
+>     `kubectl port-forward -n spire-server svc/spire-tornjak-backend 20000:10000`, which will make the service available at `http://localhost:20000`.
 
 
 ### Step 3: Run the Tornjak Manager
