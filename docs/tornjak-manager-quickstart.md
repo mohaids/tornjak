@@ -1,11 +1,51 @@
 # Demoing the Tornjak Manager
 
-1. Create Kind cluster
-2. Deploy SPIRE + Tornjak on the cluster
-3. Deploy the Tornjak manager
-4. Access the Tornjak manager UI
+This document is a step-by-step guide for demonstrating the **Tornjak Manager** and SPIRE federation locally using two KIND clusters. It is intended for contributors, developers, or users who want to understand and visualize how **Tornjak** integrates with SPIRE to manage workloads and identities across federated trust domains.
 
-We will mimic connectivity via port-forwarding. 
+The purpose of this tutorial is to:
+- Demonstrate how to deploy SPIRE and Tornjak on local Kubernetes clusters
+- Simulate trust domain federation between two clusters (e.g., server and client)
+- Set up and interact with the **Tornjak Manager**, a web-based control plane that allows users to register, manage, and monitor SPIRE servers
+- Launch a UI that visually reflects the backend state
+
+---
+
+## Quick Summary: What We'll Do
+
+1. Create a local Kubernetes cluster using KIND
+2. Deploy SPIRE and Tornjak into the cluster using Helm
+3. Run the Tornjak Manager service to coordinate SPIRE servers
+4. Access and interact with the Tornjak UI via a web browser
+
+We will mimic connectivity between the Tornjak Manager and SPIRE servers via `kubectl port-forward`.
+
+---
+
+## What is the Tornjak Manager?
+
+The **Tornjak Manager** is a component of the Tornjak project that provides centralized coordination for SPIRE servers. It serves as a backend service that:
+- Stores a list of registered SPIRE servers (each with a Tornjak backend)
+- Forwards API calls from the UI to the appropriate SPIRE server
+- Supports multiple SPIRE instances, including those across different trust domains
+- Acts as the data source for the Tornjak UI
+
+It allows administrators to manage multiple SPIRE environments through a single pane of glass — useful in multi-cluster, multi-cloud, or federated deployments.
+
+---
+
+## Terminology
+
+| Term                  | Description |
+|-----------------------|-------------|
+| **SPIRE**             | The SPIFFE Runtime Environment — a production-ready system for issuing SPIFFE IDs to workloads |
+| **Tornjak**           | An open-source UI and manager built around SPIRE for easier visualization, interaction, and control |
+| **Tornjak Backend**   | A service running alongside the SPIRE server that exposes Tornjak-specific APIs |
+| **Tornjak Manager**   | A centralized API layer that registers and queries multiple Tornjak backends (SPIRE servers) |
+| **Tornjak UI**        | A React-based web frontend that communicates with the Tornjak Manager to display SPIRE data |
+| **Trust Domain**      | A unique namespace used by SPIRE to distinguish identities between different environments (e.g., `example.org`) |
+| **Federation**        | A trust relationship between different SPIRE servers, allowing them to recognize and trust each other’s identities |
+| **KIND**              | Kubernetes IN Docker — a local Kubernetes cluster tool used for development and testing |
+| **Helm**              | A Kubernetes package manager used to deploy applications via charts |
 
 ----------
 
