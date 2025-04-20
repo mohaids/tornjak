@@ -181,6 +181,10 @@ REACT_APP_API_SERVER_URI=http://localhost:50000/ REACT_APP_TORNJAK_MANAGER=true 
     - **Possible Cause**: The backend API at `localhost:50000` might not be accessible or running.
     - **Tip**: Ensure the Tornjak Manager API is running and that you've completed the necessary steps for port-forwarding to expose it correctly. You can check the status of the API with `curl http://localhost:50000/manager-api/server/list`.
 
+- **API call errors (e.g., 404 Not Found or 500 Internal Server Error):**
+    - **Possible Cause**: The backend API might be misconfigured, or the Tornjak Manager service is not responding as expected.
+    - **Tip**: Check the backend logs for any errors by running kubectl logs <backend-pod-name> -n spire-server. Ensure that the backend service is running and the endpoints are exposed correctly.
+
 ### Cleanup
 
 Running the manager in local mode creates a local DB file which we can remove:
